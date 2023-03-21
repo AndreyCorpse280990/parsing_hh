@@ -1,1 +1,10 @@
+config.py
+vacancies.db
+test.py
+vvb.py
+hh_vacancies.db
+geckodriver.log
+database.py
 /env
+.idea
+__pycache__/
