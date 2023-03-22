@@ -1,9 +1,16 @@
 import statistics
 import requests
 import json
+import logging
 
 from datetime import date
 from database import *
+
+
+# настраиваем логирование
+logging.getLogger('sqlalchemy').setLevel(logging.WARNING)
+logging.basicConfig(filename='vacancies.log', level=logging.WARNING,
+                    encoding="utf-8", format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 def get_found(session):
@@ -11,11 +18,11 @@ def get_found(session):
     params_list = ["python", "javascript", "c++", "C#", "java", "Go", "PHP",
                    "Kotlin", "Rust", "Ruby", "Swift", "TypeScript"]
     data_time = date.today()
-
     for param in params_list:
         try:
             params = {"text": param}
             response = requests.get(url, params=params)
+            response.raise_for_status() # проверка нет ли ошибок в ответе
             data = json.loads(response.text)
             found = data["found"]
             vacancy_salary = []
@@ -31,7 +38,7 @@ def get_found(session):
                         else:
                             vacancy_not_salary.append(vacancy)
                 except TypeError:
-                    pass
+                    logging.warning(f"Ошибка при обработке вакансии {vacancy} in {param}")
 
             if len(vacancy_salary) > 0:
                 vacancy_salaries = []
@@ -48,7 +55,8 @@ def get_found(session):
                 session.add(vacancy)
                 session.commit()
         except (requests.exceptions.RequestException, json.JSONDecodeError) as e:
-            print(f"Произошла ошибка при обработке вакансий '{param} vacancies: {e}")
+            logging.error(f"Не удалось получить данные о вакансиях для {param}: {e}")
+            continue
 
 
 if __name__ == '__main__':
