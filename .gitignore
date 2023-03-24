@@ -1,7 +1,6 @@
 /config.py
-/vacancies.db
-/test.py
-/vvb.py
+/database/vacancies.db
+/tests
 /hh_vacancies.db
 /geckodriver.log
 /database/database.py
@@ -9,3 +8,4 @@
 .idea
 __pycache__/
 vacancies.log
+identifier.sqlite

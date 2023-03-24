@@ -1,9 +1,12 @@
+import os
+
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
-# Создаем соединение с базой данных
-engine = create_engine('sqlite:///vacancies.db', echo=True)
 
+# Создаем соединение с базой данных
+db_file = os.path.join(os.path.dirname(__file__), 'vacancies.db')
+engine = create_engine('sqlite:///{}'.format(db_file), echo=False)
 # Создаем базовый класс
 Base = declarative_base()
 
