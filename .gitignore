@@ -1,1 +1,11 @@
+/config.py
+/database/vacancies.db
+/tests
+/hh_vacancies.db
+/geckodriver.log
+/database/database.py
 /env
+.idea
+__pycache__/
+vacancies.log
+identifier.sqlite
