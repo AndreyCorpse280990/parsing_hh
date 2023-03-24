@@ -4,13 +4,13 @@ import json
 import logging
 
 from datetime import date
-from database import *
+from database.database import *
 from bs4 import BeautifulSoup
 
 # настраиваем логирование
 
 logging.getLogger('sqlalchemy').setLevel(logging.ERROR)
-logging.basicConfig(filename='vacancies.log', level=logging.WARNING,
+logging.basicConfig(filename='../vacancies.log', level=logging.WARNING,
                     encoding="utf-8",
                     format='%(asctime)s - %(levelname)s - %(message)s')
 

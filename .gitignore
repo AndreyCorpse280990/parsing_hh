@@ -4,7 +4,7 @@
 /vvb.py
 /hh_vacancies.db
 /geckodriver.log
-/database.py
+/database/database.py
 /env
 .idea
 __pycache__/
